@@ -52,6 +52,11 @@ if ($request_uri === '/') {
     )
     );
 
+} elseif ($request_uri === "/templates") {
+    // Render the page with templates
+    echo $twig->render('templates.html.twig'
+    );
+
 } else {
     // Handle 404 - Page not found
     http_response_code(404);
