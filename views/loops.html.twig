@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Loops
+{% endblock %}
+
+{% block content %}
+	<h2>Loops</h2>
+	<p>To display content using a loop in Twig, the following syntax is used:
+		<pre><code>
+&#123;% for [item] in [array] %&#125;
+    &#123;&#123; [item].[property] &#125;&#125;
+&#123;% endfor %&#125;
+        </code></pre>
+		Some common usecases for a
+		<code>for</code>
+		loop are lists and tables.
+	</p>
+
+	<h3>Example 1: Lists</h3>
+	<h4>Code</h4>
+	In
+	<code>index.php</code>
+	we need to pass the data:
+	<pre><code>
+$twig->render('loops.html.twig', array(
+        'users' => array(
+            array('name' => 'Maxine', 'age' => 32, 'role' => 'admin'),
+            array('name' => 'Anna', 'age' => 17, 'role' => 'user'),
+            array('name' => 'John', 'age' => 58, 'role' => 'user'),
+        )
+    </code></pre>
+	In this file (<code>loops.html.twig</code>):
+	<pre><code>
+&#123;% for user in users %&#125;
+    &lt;li&gt;&#123;&#123; user.name &#125;&#125;, &#123;&#123; user.age &#125;&#125; years old, &#123;&#123; user.role &#125;&#125;&lt;/li&gt;
+&#123;% endfor %&#125;
+  </code></pre>
+
+	<h4>
+		Result
+	</h4>
+
+	{% for user in users %}
+		<li>{{ user.name }},
+			{{ user.age }}
+			years old,
+			{{ user.role }}</li>
+	{% endfor %}
+
+	<h3>Example 2: Tables</h3>
+    <h4>Code</h4>
+    <p>
+	In
+	<code>index.php</code>
+	we need to pass the data (code the same as for the example 1).</p>
+    <p>
+    In this file (<code>loops.html.twig</code>):
+	<pre><code>
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;#&lt;/th&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Age&lt;/th&gt;
+            &lt;th&gt;Role&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &#123;% set counter = 0 %&#125;
+        &#123;% for user in users %&#125;
+        &lt;tr&gt;
+            &lt;th&gt;&#123;&#123; counter &#125;&#125;&lt;/th&gt;
+            &lt;th&gt;&#123;&#123; user.name &#125;&#125;&lt;/th&gt;
+            &lt;th&gt;&#123;&#123; user.age &#125;&#125;&lt;/th&gt;
+            &lt;th&gt;&#123;&#123; user.role &#125;&#125;&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&#123;% for user in users %&#125;
+    &lt;li&gt;&#123;&#123; user.name &#125;&#125;, &#123;&#123; user.age &#125;&#125; years old, &#123;&#123; user.role &#125;&#125;&lt;/li&gt;
+&#123;% endfor %&#125;
+  </code></pre></p>
+
+  <h4>Result</h4>
+
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Role</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% set counter = 0 %}
+			{% for user in users %}
+				{% set counter = counter + 1 %}
+				<tr>
+					<td>{{ counter }}</td>
+					<td>{{ user.name }}</td>
+					<td>{{ user.age }}</td>
+					<td>{{ user.role }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -38,7 +38,19 @@ if ($request_uri === '/') {
     echo $twig->render('conditionals.html.twig', array(
         'name' => 'John Doe',
         'age' => 25,
-    ));
+    )
+    );
+
+} elseif ($request_uri === '/loops') {
+    // Render the page with loops
+    echo $twig->render('loops.html.twig', array(
+        'users' => array(
+            array('name' => 'Maxine', 'age' => 32, 'role' => 'admin'),
+            array('name' => 'Anna', 'age' => 17, 'role' => 'user'),
+            array('name' => 'John', 'age' => 58, 'role' => 'user'),
+        )
+    )
+    );
 
 } else {
     // Handle 404 - Page not found
