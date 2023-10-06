@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Variables
+{% endblock %}
+
+{% block content %}
+	<h2>Rendering variables</h2>
+	<p>To render a variable you access it directly within double curly braces
+		<code>&#123;&#123;...&#125;&#125;</code>. For example, to access the
+		<code>name</code>
+		variable, you write it like so:
+		<code>&#123;&#123; name &#125;&#125;</code>.</p>
+	<h3>Example
+	</h3>
+	<p>Below I'm accessing variables
+		<code>name</code>
+		and
+		<code>age</code>
+		that are passed on to in the
+		<code>index.php</code>
+		to the
+		<code>variables</code>
+		page. You can see that in the source code on GitHub, but here Twig compiles them to HTML.</p>
+	<h4>Code</h4>
+	In
+	<code>index.php</code> we need to pass the data:
+	<pre><code>
+echo $twig->render(
+'variables.html.twig',
+array(
+    'name' => 'John Doe',
+    'age' => 25,
+    )
+);
+    </code></pre>
+	In this file (<code>variables.html.twig</code>):
+	<pre><code>
+&#123;% block [blockname] %&#125;
+        <p>Hello, &#123;&#123; name &#125;&#125;! You are &#123;&#123; age &#125;&#125; years old.</p>
+&#123;% endblock %&#125;
+  </code></pre>
+	<h4>Result</h4>
+	<p>Hello,
+		{{ name }}! You are
+		{{ age }}
+		years old.</p>
+{% endblock %}

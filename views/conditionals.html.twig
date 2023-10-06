@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Conditionals
+{% endblock %}
+
+{% block content %}
+	<h2>Conditional rendering</h2>
+	<p>To display content based on a given condition the following syntax is used:
+    <pre><code>
+&#123;% if [condition] %&#125;
+    [what to render if the condition is true]
+&#123;% else %&#125;
+    [what to render if the condition is false]
+&#123;% endif %&#125;
+    </code></pre>
+    <h3>Example</h3>
+    <p>From the previous example with displaying variables:</p>
+	<code><p>Hello,
+		{{ name }}! You are
+		{{ age }}
+		years old.</p></code>
+    I'll use a conditional <code>if... else</code> statement to display a message based on the condition: if the user is above 18, the message will show they can legally drive, and if they are below 18 the message will say they cannot.
+    <h4>Code</h4>
+    In
+	<code>index.php</code> we need to pass the data:
+	<pre><code>
+echo $twig->render(
+'conditionals.html.twig',
+array(
+    'name' => 'John Doe',
+    'age' => 25,
+    )
+);
+    </code></pre>
+    In this file (<code>variables.html.twig</code>):
+	<pre><code>
+&#123;% if age > 18 %&#125;
+    You are above 18, so you can legally drive.
+&#123;% else %&#125;
+    You are not above 18, so you cannot legally drive.
+&#123;% endif %&#125;
+  </code></pre>
+    <h4>Result</h4>
+	{% if age > 18 %}
+		<p>You are above 18, so you can legally drive.</p>
+	{% else %}
+		<p>You are not above 18, so you cannot legally drive.</p>
+	{% endif %}
+{% endblock %}
